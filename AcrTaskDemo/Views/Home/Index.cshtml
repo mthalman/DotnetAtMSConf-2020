@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>You are running .NET runtime version:</p>
+    <div id="version" class="old-version" />
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function poll(fn, interval) {
+            interval = interval || 100;
+
+            var checkCondition = function (resolve, reject) {
+                // If the condition is met, we're done!
+                var result = fn();
+                if (result) {
+                    resolve(result);
+                }
+
+                setTimeout(checkCondition, interval, resolve, reject);
+            };
+
+            return new Promise(checkCondition);
+        }
+
+        $(document).ready(() => {
+            poll(() => {
+                $.ajax({
+                    url: "/version",
+                    type: "GET",
+                    success: data => {
+                        var origVal = document.getElementById("version").innerHTML;
+                        document.getElementById("version").innerHTML = data;
+
+                        if (origVal.trim() && data != origVal) {
+                            document.getElementById("version").className = "new-version";
+                        }
+                    }
+                });
+            }, 5000);
+        });
+
+    </script>
+}
