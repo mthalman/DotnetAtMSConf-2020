@@ -43,3 +43,4 @@ RUN powershell_version=7.0.3 \
     && find /usr/share/powershell -print | grep -i '.*[.]nupkg$' | xargs rm \
     # Add ncurses-terminfo-base to resolve psreadline dependency
     && apk add --no-cache ncurses-terminfo-base
+
