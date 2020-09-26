@@ -1,4 +1,4 @@
-FROM mthalman.azurecr.io/DotnetAtMSConf/aspnet:3.1
+FROM mthalman.azurecr.io/dotnetatmsconf/aspnet:3.1
 
 ENV \
     # Unset ASPNETCORE_URLS from aspnet base image
